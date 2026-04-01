@@ -12,4 +12,5 @@ resource_names = {
   cloudamqp_message_broker                      = "howestprime-message-broker"
   azurerm_log_analytics                         = "howestprime-logger"
   azurerm_container_environment                 = "howestprime-container-environment"
+  azurerm_managed_identity                      = "mi-howestprime-prod-github-cicd"
 }

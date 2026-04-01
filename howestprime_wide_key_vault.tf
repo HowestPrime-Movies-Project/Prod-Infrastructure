@@ -21,8 +21,19 @@ resource "azurerm_role_assignment" "terraform_kv_admin" {
     principal_id = var.service_principal_terraform_sp_id
 
     depends_on = [ 
-        azurerm_key_vault.howestprime_wide_kv 
+        azurerm_key_vault.howestprime_wide_kv
         ]
+}
+
+resource "azurerm_role_assignment" "terraform_kv_secrets_officer" {
+    scope = azurerm_key_vault.howestprime_wide_kv.id
+    principal_id = azurerm_user_assigned_identity.managed_identity.principal_id
+    role_definition_name = "Key Vault Secrets Officer"
+
+    depends_on = [ 
+        azurerm_key_vault.howestprime_wide_kv
+        ]
+  
 }
 
 resource "azurerm_key_vault_secret" "cloudamqp_password" {
