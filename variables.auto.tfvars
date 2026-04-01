@@ -10,5 +10,6 @@ resource_names = {
   azurerm_key_vault_howestprime                 = "hp-kv-azure-is-fun"
   azurerm_container_registry_howestprime        = "howestprimewidepcr"
   cloudamqp_message_broker                      = "howestprime-message-broker"
-  log_analytics                                 = "howestprime-logger"
+  azurerm_log_analytics                         = "howestprime-logger"
+  azurerm_container_environment                 = "howestprime-container-environment"
 }
