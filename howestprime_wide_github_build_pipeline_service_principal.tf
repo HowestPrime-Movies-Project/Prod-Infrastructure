@@ -11,11 +11,11 @@ resource "azuread_application_password" "github_cicd" {
   application_id = azuread_application.github_cicd.id
 
   rotate_when_changed = {
-    rotation = time_rotating.github_cicd_secret_rotation.id
+    rotation  = time_rotating.github_cicd_secret_rotation.id
   }
 }
 
 resource "azuread_service_principal" "github_cicd" {
-  client_id = azuread_application.github_cicd.client_id
-  owners = [ var.service_principal_terraform_sp_id ]
+  client_id   = azuread_application.github_cicd.client_id
+  owners      = [ var.service_principal_terraform_sp_id ]
 }
