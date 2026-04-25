@@ -11,6 +11,14 @@ terraform {
       source = "cloudamqp/cloudamqp"
       version = "~>1.42"
     }
+    random = {
+      source = "hashicorp/random"
+      version = "~> 3.0"
+    }
+    github = {
+      source  = "integrations/github"
+      version = "~> 6.0"
+    }
   }
 }
 
@@ -33,4 +41,11 @@ provider "azurerm" {
 
 provider "cloudamqp" {
   apikey = var.cloudamqp_full_access_api_key  
+}
+
+provider "random" {}
+
+provider "github" {
+  token = var.github_personal_access_token
+  owner = var.github_organization-or-owner_name
 }

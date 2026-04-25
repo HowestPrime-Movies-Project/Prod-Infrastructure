@@ -40,3 +40,35 @@ variable "cloudamqp_full_access_api_key" {
     type        = string
     sensitive   = true
 }
+
+variable "usernames" {
+    description = ""
+    type        = map(string)
+}
+
+# ⚠️ Security Warning: This is not a good practice but for this project it is acceptable. 
+# In a production environment you should only allow the ip’s that need access to the database.
+# Because we don’t know all the Howest ip ranges we will allow all ip’s.
+variable "howestprime_allowed_ip_ranges" {
+  description = "List allowed IP addresses for documentDB firewall rule"
+  type = list(object({
+    name             = string
+    start_ip_address = string
+    end_ip_address   = string
+  }))
+}
+
+variable "github_personal_access_token" {
+  description = "A Personal Access Token For GitHub"
+  type = string
+}
+
+variable "github_organization-or-owner_name" {
+  description = "The Github Organization/Owner Name"
+  type = string
+}
+
+variable "github_movies_repository_name" {
+  description = "Repository name for the movies microservice pipeline variables/secrets"
+  type        = string
+}
