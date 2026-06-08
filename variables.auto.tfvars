@@ -1,6 +1,6 @@
 # Populates the variables with concrete values
 
-location = "swedencentral"
+location = "germanywestcentral"
 
 # Example
 # mapKey = the identifier of the resource in the Terraform code
@@ -14,6 +14,8 @@ resource_names = {
   azurerm_container_environment                 = "howestprime-container-environment"
   azurerm_managed_identity                      = "mi-howestprime-prod-github-cicd"
   azurerm_postgresql_flexible_server_movies     = "hp-psql-movies-prod" 
+  azurerm_service_plan_backoffice_client        = "hp-asp-backoffice-client"
+  azurerm_linux_web_app_backoffice_client       = "hp-alwa-backoffice-client"
 }
 
 usernames = {
