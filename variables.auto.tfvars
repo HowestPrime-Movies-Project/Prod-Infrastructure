@@ -16,10 +16,14 @@ resource_names = {
   azurerm_postgresql_flexible_server_movies     = "hp-psql-movies-prod" 
   azurerm_service_plan_backoffice_client        = "hp-asp-backoffice-client"
   azurerm_linux_web_app_backoffice_client       = "hp-alwa-backoffice-client"
+  azurerm_cosmosdb_account_ticketing            = "hp-cosmosdb-mauricedk"
+  azurerm_cosmosdb_mongo_database_ticketing     = "microservice-ticketing-mongo-db"
+  
 }
 
 usernames = {
   movies_microservice_database_username = "MauriceDk06"
+  howestprime_microservice_ticketing_db = "MauriceDk06"
 }
 
 

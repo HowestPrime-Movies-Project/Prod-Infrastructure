@@ -69,6 +69,6 @@ resource "github_actions_secret" "howestprime_backoffice" {
   for_each      = local.howestprime-backoffice-gh-action-secrets
   repository    = local.howestprime_repo_backoffice
   secret_name   = each.value.secret_name
-  plaintext_value = each.value.value
+  value = each.value.value
   depends_on = [ azurerm_container_app_environment.howestprime_wide_ce ]
 }

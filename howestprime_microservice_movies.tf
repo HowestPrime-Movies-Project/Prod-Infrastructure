@@ -151,5 +151,5 @@ resource "github_actions_secret" "howestprime_movies" {
   for_each      = local.howestprime-movies-gh-action-secrets
   repository    = local.howestprime_repo_movies
   secret_name   = each.value.secret_name
-  plaintext_value = each.value.value
+  value = each.value.value
 }
