@@ -1,6 +1,6 @@
 # Populates the variables with concrete values
 
-location = "germanywestcentral"
+location = "swedencentral"
 
 # Example
 # mapKey = the identifier of the resource in the Terraform code
