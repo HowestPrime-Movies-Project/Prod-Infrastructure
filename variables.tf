@@ -72,3 +72,13 @@ variable "github_movies_repository_name" {
   description = "Repository name for the movies microservice pipeline variables/secrets"
   type        = string
 }
+
+variable "vite_app_ticketing_api_url" {
+  description = "The API url for ticketing microservice"
+  type = string
+}
+
+variable "vite_app_movies_base_api_url" {
+  description = "The API url for movies microservice"
+  type = string
+}

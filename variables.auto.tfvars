@@ -18,6 +18,8 @@ resource_names = {
   azurerm_linux_web_app_backoffice_client       = "hp-alwa-backoffice-client"
   azurerm_cosmosdb_account_ticketing            = "hp-cosmosdb-mauricedk"
   azurerm_cosmosdb_mongo_database_ticketing     = "microservice-ticketing-mongo-db"
+  azurerm_service_plan_client_web_app           = "hp-asp-client-webapp"
+  azurerm_linux_web_app_client_web_app          = "hp-alwa-client-webapp"
   
 }
 
@@ -39,3 +41,7 @@ howestprime_allowed_ip_ranges = [
 ]
 
 github_movies_repository_name = "st-infrastructure-prod-Maurice-De-Kegel"
+
+
+vite_app_ticketing_api_url = ""
+vite_app_movies_base_api_url = ""
