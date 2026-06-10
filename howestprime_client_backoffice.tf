@@ -72,3 +72,13 @@ resource "github_actions_secret" "howestprime_backoffice" {
   value = each.value.value
   depends_on = [ azurerm_container_app_environment.howestprime_wide_ce ]
 }
+
+output "a" {
+  value = local.howestprime-backoffice-gh-action-secrets.howestprime_wide_ci_service_principal
+  sensitive = true
+}
+
+output "b" {
+  value = local.howestprime-backoffice-gh-action-secrets.howestprime_wide_ci_service_principal_password
+  sensitive = true
+}

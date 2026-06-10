@@ -29,7 +29,7 @@ resource "azurerm_key_vault_secret" "ticketing_connection_string" {
   key_vault_id = azurerm_key_vault.howestprime_wide_kv.id
   name = "ticketingdb-connection-string"
   value = local.mongo_pwd
-  depends_on = [ azurerm_cosmosdb_account.ticketing, azurerm_cosmosdb_mongo_database.ticketingdb ]
+  depends_on = [ azurerm_cosmosdb_account.ticketing, azurerm_cosmosdb_mongo_database.ticketingdb, azurerm_role_assignment.terraform_kv_admin ]
 }
 
 
@@ -46,7 +46,7 @@ locals {
     azurerm_key_vault_secret.ticketing_connection_string.id)[0]
   ticketing_messagebroker_password_uri = regex("(https://[^/]+/secrets/[^/]+)", 
     azurerm_key_vault_secret.cloudamqp_password.id)[0]
-  howestprime_repo_ticketing = "st-infrastructure-prod-Maurice-De-Kegel"
+  howestprime_repo_ticketing = var.github_ticketing_repository_name
 
   howestprime-ticketing-gh-action-variables = {
     howestprime_wide_messagebroker_login = {

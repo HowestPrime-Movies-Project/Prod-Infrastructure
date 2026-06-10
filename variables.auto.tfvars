@@ -40,7 +40,8 @@ howestprime_allowed_ip_ranges = [
   }
 ]
 
-github_movies_repository_name = "st-infrastructure-prod-Maurice-De-Kegel"
+github_movies_repository_name    = "st-microservice-movies-Maurice-De-Kegel"
+github_ticketing_repository_name = "st-microservice-ticketing-Maurice-De-Kegel"
 
 
 vite_app_ticketing_api_url = ""
