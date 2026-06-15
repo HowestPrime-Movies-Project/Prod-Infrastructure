@@ -44,5 +44,5 @@ github_movies_repository_name    = "st-microservice-movies-Maurice-De-Kegel"
 github_ticketing_repository_name = "st-microservice-ticketing-Maurice-De-Kegel"
 
 
-vite_app_ticketing_api_url = ""
-vite_app_movies_base_api_url = ""
+vite_app_ticketing_api_url = "https://st-microservice-ticketing.jollystone-dfeed9a2.swedencentral.azurecontainerapps.io"
+vite_app_movies_base_api_url = "https://microservice-movies.jollystone-dfeed9a2.swedencentral.azurecontainerapps.io"

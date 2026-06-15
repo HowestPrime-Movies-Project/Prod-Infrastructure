@@ -19,6 +19,10 @@ resource "azurerm_linux_web_app" "backoffice_web_client" {
     }
   }
 
+  app_settings = {
+    ASPNETCORE_ENVIRONMENT = "Production"
+  }
+
   name = var.resource_names.azurerm_linux_web_app_backoffice_client
   location = azurerm_resource_group.wide_rg.location
   resource_group_name = azurerm_resource_group.wide_rg.name
@@ -71,14 +75,4 @@ resource "github_actions_secret" "howestprime_backoffice" {
   secret_name   = each.value.secret_name
   value = each.value.value
   depends_on = [ azurerm_container_app_environment.howestprime_wide_ce ]
-}
-
-output "a" {
-  value = local.howestprime-backoffice-gh-action-secrets.howestprime_wide_ci_service_principal
-  sensitive = true
-}
-
-output "b" {
-  value = local.howestprime-backoffice-gh-action-secrets.howestprime_wide_ci_service_principal_password
-  sensitive = true
 }
