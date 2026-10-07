@@ -1,103 +1,145 @@
-# Howest Prime Infrastructure
+<div align="center">
 
-Production infrastructure for the Howest Prime movies platform, managed as code with Terraform.
+# 🏗️ HowestPrime Production Infrastructure
 
-This repository provisions the shared Azure and GitHub foundation that supports the client-facing web app, back office application, movies microservice, and ticketing microservice.
+**A Terraform-based Azure foundation for deploying the HowestPrime movie platform with repeatable cloud resources and GitHub automation.**
 
-## Overview
+<p>
+  <img src="https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white" alt="Terraform badge">
+  <img src="https://img.shields.io/badge/Azure-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Azure badge">
+  <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions badge">
+  <img src="https://img.shields.io/badge/Key_Vault-0089D6?style=for-the-badge&logo=azurekeyvault&logoColor=white" alt="Key Vault badge">
+  <img src="https://img.shields.io/badge/Container_Registry-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Container Registry badge">
+  <img src="https://img.shields.io/badge/Container_Apps-3A3A3A?style=for-the-badge&logo=azuredevops&logoColor=white" alt="Container Apps badge">
+</p>
 
-The project is designed to create a repeatable, environment-based deployment for the Howest Prime ecosystem. It handles:
+</div>
 
-- Azure resource provisioning
-- Shared security and secret management
-- Container platform setup
-- Database provisioning for backend services
-- Event messaging integration
-- GitHub Actions pipeline configuration for downstream repositories
+> Infrastructure as code for the shared production environment behind the platform.
 
-## What this infrastructure includes
+## 📑 Table of Contents
 
-### Azure platform
-- Resource group for the production environment
-- Azure Key Vault for secret storage
-- Azure Container Registry for image hosting
-- Azure Container Apps environment for service hosting
-- Azure Log Analytics workspace for operational monitoring
-- Managed identity for Azure resource access
-- Linux Web Apps for the client-facing site and back office app
+- [📖 About](#about)
+- [🏗️ Architecture](#architecture)
+- [✨ Features](#features)
+- [📱 Provisioned Components](#provisioned-components)
+- [🛠️ Tech Stack](#tech-stack)
+- [🚀 Getting Started](#getting-started)
+- [📄 License](#license)
+- [👤 Author](#author)
 
-### Application data and messaging
-- PostgreSQL Flexible Server for the movies microservice
-- Azure Cosmos DB with MongoDB API for the ticketing microservice
-- CloudAMQP message broker for asynchronous communication
+## 📖 About
 
-### CI/CD and GitHub integration
-- GitHub organization/owner configuration
-- GitHub Actions variables and secrets for the movies and ticketing repositories
-- Azure service principal setup for CI/CD automation
+- This repository provisions the shared Azure and GitHub foundation for the HowestPrime movie platform.
+- It keeps the deployment model repeatable across environments by using Terraform.
+- The infrastructure supports the client app, the backoffice, the microservices, and the shared messaging layer.
+- Sensitive values are expected to stay out of source control and belong in local or secret-managed configuration.
 
-## Repository structure
+## 🏗️ Architecture
 
-- `main.tf` — Terraform version and providers
-- `variables.tf` — shared input variables
-- `variables.auto.tfvars` — non-sensitive environment configuration
-- `variables.sensitive.auto.tfvars` — sensitive environment values (keep local/private)
-- `howestprime_wide_resource_group.tf` — resource group definition
-- `howestprime_wide_key_vault.tf` — Azure Key Vault setup and access control
-- `howestprime_wide_container_registry.tf` — container registry definition
-- `howestprime_wide_container_environment.tf` — Azure Container Apps environment
-- `howestprime_wide_log_analytics.tf` — monitoring workspace
-- `howestprime_wide_managed_identity.tf` — managed identity
-- `howestprime_wide_message_broker.tf` — CloudAMQP broker configuration
-- `howestprime_microservice_movies.tf` — PostgreSQL and GitHub settings for movies service
-- `howestprime_microservice_ticketing.tf` — Cosmos DB and GitHub settings for ticketing service
-- `howestprime_client_web_app.tf` — client web application hosting
-- `howestprime_client_backoffice.tf` — back office hosting
-- `howestprime_wide_github_build_pipeline_service_principal.tf` — CI/CD identity and permissions
+```mermaid
+flowchart TB
+    GitHub[GitHub Repositories] --> TF[Terraform]
+    TF --> RG[Azure Resource Group]
+    RG --> KV[Key Vault]
+    RG --> ACR[Container Registry]
+    RG --> LOG[Log Analytics]
+    RG --> ENV[Container Apps Environment]
+    RG --> ID[Managed Identity]
+    RG --> MQ[CloudAMQP Broker]
+    RG --> PG[(PostgreSQL Flexible Server)]
+    RG --> COSMOS[(Cosmos DB / MongoDB API)]
+    RG --> WEB[Web Apps]
+```
 
-## Requirements
+## ✨ Features
 
-Before running Terraform, make sure you have:
+**☁️ Azure platform**
+
+- Resource group for the production environment.
+- Azure Key Vault for secret storage.
+- Azure Container Registry for image hosting.
+- Azure Container Apps environment for service hosting.
+- Azure Log Analytics workspace for monitoring.
+- Managed identity for Azure access.
+- Web App hosting for the client-facing site and the backoffice.
+
+**🗄️ Data and messaging**
+
+- PostgreSQL Flexible Server for the movies service.
+- Cosmos DB with MongoDB API for the ticketing service.
+- CloudAMQP message broker for asynchronous communication.
+
+**🔁 CI/CD**
+
+- GitHub configuration for the application repositories.
+- Shared pipeline credentials and deployment automation.
+- Azure service principal setup for Terraform and release flows.
+
+## 📱 Provisioned Components
+
+| Component | Purpose |
+| --- | --- |
+| Resource group | Shared Azure boundary for the platform |
+| Key Vault | Secret storage and access control |
+| Container Registry | Docker image storage |
+| Container Apps environment | Hosting environment for services |
+| Log Analytics | Operational monitoring and diagnostics |
+| Managed identity | Azure resource authentication |
+| Message broker | Event-driven communication backbone |
+| PostgreSQL | Movies service database |
+| MongoDB API | Ticketing service persistence |
+| Web Apps | Client and backoffice hosting |
+
+## 🛠️ Tech Stack
+
+| Area | Technologies |
+| --- | --- |
+| IaC | Terraform |
+| Cloud | Azure |
+| CI/CD | GitHub Actions |
+| Secrets | Azure Key Vault |
+| Runtime hosting | Container Apps, Web Apps |
+| Data | PostgreSQL, Cosmos DB / MongoDB API |
+| Messaging | CloudAMQP |
+
+## 🚀 Getting Started
+
+### Prerequisites
 
 - Terraform v1.14.5 or newer
-- Azure CLI configured with access to the target subscription
-- A valid Azure service principal for Terraform deployment
+- Azure CLI configured for the target subscription
+- A valid Azure service principal
 - A GitHub personal access token with repository access
 - CloudAMQP API credentials
-- The required environment variables or `.auto.tfvars` values populated
+- Required values in `variables.auto.tfvars` and `variables.sensitive.auto.tfvars`
 
-## Configuration
-
-This project uses a combination of:
-
-- `variables.tf` for required input definitions
-- `variables.auto.tfvars` for environment-specific names and URLs
-- `variables.sensitive.auto.tfvars` for secret values such as Azure credentials and API keys
-
-The environment is configured around a shared Azure resource group and shared secrets in Key Vault, so application repositories can consume generated values securely.
-
-## Deployment flow
-
-Run the following from the repository root:
+### Initialize
 
 ```bash
 terraform init
+```
+
+### Review the plan
+
+```bash
 terraform plan
+```
+
+### Apply the infrastructure
+
+```bash
 terraform apply
 ```
 
-After deployment, Terraform updates the GitHub repositories with generated variables and secrets so the backend services and front-end apps can build and deploy correctly.
+After deployment, Terraform updates the downstream repositories with the values they need for build and release automation.
 
-## Security notes
+## 📄 License
 
-- Database access is intentionally open for this educational/project environment. The configuration includes a broad firewall rule because the exact allowed corporate/public IP ranges were not known.
-- Sensitive values should never be committed to source control.
-- The Key Vault integration is used to store generated credentials such as database passwords and message broker credentials.
+This repository is part of the HowestPrime course project and is intended for educational use.
 
-## Purpose of this repository
+## 👤 Author
 
-This is the infrastructure layer behind the Howest Prime platform. It does not contain the application business logic itself; instead, it creates and connects the cloud resources that application repositories depend on.
-
-## Status
-
-This repository is set up for production-style Azure provisioning and GitHub automation within the Howest Prime project context.
+| Name | GitHub | LinkedIn |
+| --- | --- | --- |
+| Maurice De Kegel | [MriceDK](https://github.com/MriceDK) | [LinkedIn](https://www.linkedin.com/in/dekegelmaurice/) |
