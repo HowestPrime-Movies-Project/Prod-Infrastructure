@@ -134,9 +134,10 @@ terraform apply
 
 After deployment, Terraform updates the downstream repositories with the values they need for build and release automation.
 
+
 ## 📄 License
 
-This repository is part of the HowestPrime course project and is intended for educational use.
+This project uses the Apache 2.0 License
 
 ## 👤 Author
 
